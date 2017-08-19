@@ -1,34 +1,33 @@
 node {
 
-    stage 'Checkout' {
+    stage 'Checkout'
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/abnormallydriven/android-ci-example.git']]])
         sh "./gradlew clean"
-    }
 
-    stage 'Unit Test'{
+
+    stage 'Unit Test'
         sh "./gradlew test"
-    }
 
-    stage 'Assemble Android Test' {
+
+    stage 'Assemble Android Test'
         sh "./gradlew assembleDebug"
         sh "./gradlew assembleDebugAndroidTest"
-    }
 
-    stage 'Cloud Test Lab' {
+
+    stage 'Cloud Test Lab'
             sh 'echo TODO'
-    }
 
-    stage 'Amazon Device Lab' {
+
+    stage 'Amazon Device Lab'
             sh 'echo TODO'
-    }
 
-    stage 'Build Release' {
+
+    stage 'Build Release'
         sh "./gradlew assemble"
-    }
 
-    stage 'Archive' {
+
+    stage 'Archive'
         step([$class: 'ArtifactArchiver', artifacts: 'app/build/outputs/apk/*.apk', fingerprint: true])
         step([$class: 'JUnitResultArchiver', testResults: 'app/build/test-results/**/TEST-*.xml'])
-    }
 
 }
