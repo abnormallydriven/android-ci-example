@@ -15,7 +15,8 @@ node {
 
 
     stage 'Cloud Test Lab'
-            sh 'echo TODO'
+
+           sh "gcloud beta test android run --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-androidTest.apk"
 
 
     stage 'Amazon Device Lab'
