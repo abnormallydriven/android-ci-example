@@ -16,7 +16,7 @@ node {
 
     stage 'Cloud Test Lab'
         sh "gcloud auth activate-service-account --key-file /opt/service_account_key.json"
-        sh "gcloud firebase test android run --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait"
+        sh "gcloud firebase test android run --project ${env.gcloud_project_id} --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-androidTest.apk --device model=Nexus6,version=21,locale=en,orientation=portrait"
 
 
     stage 'Amazon Device Lab'
